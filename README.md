@@ -10,6 +10,29 @@ Antes de comenzar, asegúrate de tener instalado:
 - Un entorno de desarrollo como [Visual Studio Code](https://code.visualstudio.com/).
 
 ---
+---
+
+## Requisitos para la Automatización del Sistema
+
+Este repositorio utiliza **Python** y varias bibliotecas esenciales para automatizar un sistema. Asegúrate de tener instaladas las siguientes bibliotecas antes de ejecutar el proyecto.
+
+### Bibliotecas necesarias
+
+El proyecto requiere las siguientes bibliotecas de Python:
+
+- `selenium`: Para controlar el navegador web.
+- `webdriver-manager`: Para gestionar automáticamente los controladores de los navegadores.
+- `time`: Para gestionar retardos en la ejecución de comandos.
+- `unicodedata`: Para trabajar con caracteres Unicode.
+
+### Instalación de las bibliotecas
+
+Para instalar todas las bibliotecas necesarias, ejecuta el siguiente comando:
+
+```bash
+pip install selenium webdriver-manager
+
+
 
 ## Clonar el Proyecto
 
