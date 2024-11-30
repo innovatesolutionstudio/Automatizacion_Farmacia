@@ -3,51 +3,76 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
+# Configurar el controlador
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.maximize_window()
 
 try:
+    # Navegar a la página inicial
     driver.get('http://localhost:3001/pagina_pedidos/clientes_index')
 
-    contacto_link = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//a[@class='nav-link' and text()='Contacto']"))
-    )
-    contacto_link.click()
+    # Hacer clic en el enlace "Contacto"
+    driver.find_element(By.XPATH, "//a[text()='Contacto']").click()
+    print("Clic en el enlace 'Contacto'.")
     time.sleep(3)
 
-    # Sección de contacto 
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "contacto"))
-    )
+
+    # Hacer clic en el enlace "Inicio"
+    driver.find_element(By.XPATH, "//a[text()='Inicio']").click()
+    print("Redirigido a la página de inicio.")
     time.sleep(3)
 
-    # Validar que los elementos de contacto estén presentes
-    contacto_info = driver.find_element(By.XPATH, "//div[@class='contact-info']")
-    contacto_details = driver.find_element(By.XPATH, "//div[@class='contact-details']")
-    print("Sección de contacto cargada correctamente.")
+    # Navegar a la página de login
+    driver.get('http://localhost:3001/login')
+    print("Redirigido a la página de login de empleados.")
     time.sleep(3)
 
-    # Opcional: Validar si el horario, teléfono, o correo están visibles
-    horario = contacto_details.find_element(By.XPATH, ".//div[@class='detail-item'][1]//p").text
-    telefono = contacto_details.find_element(By.XPATH, ".//div[@class='detail-item'][2]//p").text
-    correo = contacto_details.find_element(By.XPATH, ".//div[@class='detail-item'][3]//p").text
+    # Ingresar el correo
+    driver.find_element(By.XPATH, "//input[@id='Email']").send_keys("admin@gmail.com")
+    print("Correo ingresado: admin@gmail.com")
+    time.sleep(2)
 
-    print(f"Horario de atención: {horario}")
-    print(f"Teléfono: {telefono}")
-    print(f"Correo: {correo}")
+    # Ingresar la contraseña
+    driver.find_element(By.XPATH, "//input[@id='pass']").send_keys("admin123.")
+    print("Contraseña ingresada: admin123")
+    time.sleep(2)
+
+
+    # Enviar el formulario de inicio de sesión
+    driver.find_element(By.CSS_SELECTOR, "input[type='submit']").click()
+    print("Formulario enviado.")
     time.sleep(3)
 
-    # Esperar que el iframe de Google Maps se cargue correctamente
-    mapa = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//iframe[contains(@src, 'google.com/maps/embed')]"))
-    )
-    if mapa.is_displayed():
-        print("Mapa de Google cargado correctamente.")
+    # Manejar la alerta de SweetAlert2
+    confirm_button = driver.find_element(By.CSS_SELECTOR, "button.swal2-confirm")
+    confirm_button.click()
+    print("Botón 'OK' de la alerta presionado.")
     time.sleep(3)
-    
+
+    # Hacer clic en el enlace 'Ventas'
+    driver.find_element(By.XPATH, "//a[@href='#ventas']").click()
+    print("Clic en el enlace 'Ventas'.")
+    time.sleep(3)
+
+
+    # Hacer clic en el enlace 'Nueva Venta'
+    driver.find_element(By.XPATH, "//a[@onclick=\"cargarContenido('/nueva_venta')\"]").click()
+    print("Clic en el enlace 'Nueva Venta'.")
+    time.sleep(3)
+
+
+    # Hacer clic en el enlace 'Stock Disponible'
+    driver.find_element(By.XPATH, "//a[@onclick=\"cargarContenido('/inventario_vista')\"]").click()
+    print("Clic en el enlace 'Stock Disponible'.")
+    time.sleep(3)
+
+
+    # Hacer clic en el enlace 'Historial de ventas'
+    driver.find_element(By.XPATH, "//a[@onclick=\"cargarContenido('/ventas')\"]").click()
+    print("Clic en el enlace 'Historial de ventas'.")
+    time.sleep(3)
+
 finally:
     driver.quit()
     print("Prueba completada y navegador cerrado.")
