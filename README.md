@@ -156,3 +156,17 @@ Si deseas crear una nueva rama al proyecto:
 
 ---
 
+5. Por si tienen algun fallo intentar estos pasos
+   Activar su entorno virtual, les tiene que aparecer env en color verde al inicio
+```bash
+   .\env\Scripts\activate
+```
+   Verificar librerías a instalar
+```bash
+   pip install selenium webdriver-manager
+   pip install pytest
+```
+   código para hacer correr el sistema de testeo del sistema para empleados
+```bash
+    pytest -s -v .\test_sistema_empleados\test_sistema.py
+```
