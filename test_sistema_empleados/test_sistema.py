@@ -16,6 +16,8 @@ from test_finanzas import verify_modulo_finanzas
 from test_recursos import verify_contenido_recursos  
 #llamado a la funcion del tablero
 from test_pedidos import verify_contenido_pedidos  
+#llamando a la funcion modulo ventas
+from test_ventas import verify_registro_ventas
 
 
 class Test_Sistema:
@@ -50,7 +52,7 @@ class Test_Sistema:
         time.sleep(2)
 
         #ventas
-
+        verify_registro_ventas(self.driver)
         time.sleep(2)
 
         #compras
