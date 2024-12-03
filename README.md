@@ -156,3 +156,31 @@ Si deseas crear una nueva rama al proyecto:
 
 ---
 
+## Posibles errores 
+   Por si tienen algun fallo intentar estos pasos
+   
+   1. Elimina el entorno virtual de tus archivos.
+      #
+   ![image](https://github.com/user-attachments/assets/ae0d9821-94cd-402c-bd62-f3d04b65f3c7)
+
+   2. instala nuevamente tu entorno virtual, se elimino y se volvio a crear el entorno virtual ya que el entorno del repositorio esta predeterminada de la maquina del companero que lo actualice
+```bash
+   python -m venv env
+```
+
+   3. Activar su entorno virtual, les tiene que aparecer env en color verde al inicio de tu consola
+      #
+      ![image](https://github.com/user-attachments/assets/58958153-7e1a-4adb-b712-030ad2825f60)
+
+```bash
+   .\env\Scripts\activate
+```
+   4. Verificar librerías a instalar
+```bash
+   pip install selenium webdriver-manager
+   pip install pytest
+```
+   5. Codigo para hacer correr el sistema de testeo del sistema para empleados
+```bash
+    pytest -s -v .\test_sistema_empleados\test_sistema.py
+```
