@@ -3,38 +3,65 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
+
+
 #llamado a la funcion del login
 from test_login_empleado import verify_contenido_inicio  
 
-#llamado a la funcion del tablero
-from test_tablero import verify_contenido_tablero  
-
 #llamado a la funcion del modulo de compras
-from test_compras import verify_registro_compras
+from test_compras import verify_modulo_compras
+from test_finanzas import verify_modulo_finanzas
 
+#llamado a la funcion del tablero
+from test_recursos import verify_contenido_recursos  
+#llamado a la funcion del tablero
+from test_pedidos import verify_contenido_pedidos  
 
 
 class Test_Sistema:
 
 
     def setup_method(self):
-        """Configura el entorno inicial para las pruebas."""
+
         service = Service(ChromeDriverManager().install())
         self.driver = webdriver.Chrome(service=service)
         self.driver.maximize_window()
         self.driver.get('http://localhost:3001/login')
 
     def teardown_method(self):
-        """Cierra el navegador."""
+    
         self.driver.quit()
+        print("/////////////////////////////////////////////////////////////////////////////////////////////")
         print("\nPrueba de automatizado completado")
+        print("/////////////////////////////////////////////////////////////////////////////////////////////")
 
     def test_sistema(self):
-        """Llama a la función de login y verifica el resultado."""
+        
+        #login
         verify_contenido_inicio(self.driver) 
-        time.sleep(5)
+        time.sleep(2)
 
-        """Llama a la función para la vista del modulo de compras"""
-        verify_registro_compras(self.driver) 
+        #tablero
 
-       
+        time.sleep(2)
+
+        #finanzas
+        verify_modulo_finanzas(self.driver)
+        time.sleep(2)
+
+        #ventas
+
+        time.sleep(2)
+
+        #compras
+        verify_modulo_compras(self.driver) 
+        time.sleep(2)
+        
+        #pedidos
+        verify_contenido_pedidos(self.driver)
+        time.sleep(2)
+
+        #recursos humanos
+        verify_contenido_recursos(self.driver)
+        time.sleep(2)
+   
